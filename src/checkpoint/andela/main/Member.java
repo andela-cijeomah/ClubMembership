@@ -19,6 +19,7 @@ public class Member {
     private String email;
     private String phoneNumber;
     private Date dateOfRegistration;
+    private Data data;
 
     /**
      */
@@ -123,19 +124,59 @@ public class Member {
     public void setDateOfRegistration(Date dateOfRegistration) {
         this.dateOfRegistration = dateOfRegistration;
     }
-    
+
+    /**
+     * @return the data
+     */
+    public Data getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(Data data) {
+        this.data = data;
+    }
+
+    /**
+     * @param book
+     * @param date
+     */
+    public void borrowBook(Book book, Date date) {
+
+        data.getBorrowQueue().offer(new MemberBorrowedBook(book, this, date));
+
+    }
+
     /**
      * @param book
      */
-    public void borrowBook(Book book){
-     if("Student".equals(this.getClass().getName())){
-         
-     }
+    public void returnBook(Book book) {
+        boolean isBorrower = false;
+        MemberBorrowedBook memberBorrowedBook = null;
+        for (MemberBorrowedBook mbb : data.getLendingList()) {
+            if ((this.fullName.equalsIgnoreCase(mbb.getMember().getFullName()))
+                    && book.getBookName().equalsIgnoreCase(mbb.getBook().getBookName())) {
+                isBorrower = true;
+                memberBorrowedBook = mbb;
+
+            }
+        }
+        if (memberBorrowedBook != null) {
+            System.out.printf("The name of the returner is %s \n", memberBorrowedBook.getMember().fullName);
+            System.out.printf("The number of copies left is %d \n", memberBorrowedBook.getBook().getNumberOfCopies());
+            book.setNumberOfCopies(book.getNumberOfCopies() + 1);
+            data.getLendingList().remove(memberBorrowedBook);
+            System.out.printf("The book was succesfully returned \n");
+            System.out.printf("The number of copies left is %d \n", book.getNumberOfCopies());
+        }
+        if (isBorrower) {
+
+        } else {
+            System.out.printf("The name of this member is %s \n", this.fullName);
+            System.out.printf("This member did not borrow the said book \n");
+        }
     }
-    /**
-     * @param book
-     */
-    public void returnBook(Book book){
-    
-    }
+
 }

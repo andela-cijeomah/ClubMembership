@@ -19,8 +19,10 @@ import static org.junit.Assert.*;
  */
 public class MemberTest {
     
-    public MemberTest() {
-    }
+    private Member member;
+    private Data data;
+    private Book book;
+    
     
     @BeforeClass
     public static void setUpClass() {
@@ -32,6 +34,13 @@ public class MemberTest {
     
     @Before
     public void setUp() {
+        member = new Member("Eric Abidal", 'M', new Date(98772323), "08033006978");
+        member.setEmail("eabidal@club.com");
+        member.setDateOfRegistration(new Date(99993232));
+        
+        data = new Data();
+        member.setData(data);
+        book = data.getBookByName("Things Fall Apart");
     }
     
     @After
@@ -44,12 +53,9 @@ public class MemberTest {
     @Test
     public void testGetFullName() {
         System.out.println("getFullName");
-        Member instance = new Member();
-        String expResult = "";
-        String result = instance.getFullName();
+        String expResult = "Eric Abidal";
+        String result = member.getFullName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -58,11 +64,10 @@ public class MemberTest {
     @Test
     public void testSetFullName() {
         System.out.println("setFullName");
-        String fullName = "";
-        Member instance = new Member();
-        instance.setFullName(fullName);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String fullName = "Syd Bates";
+        member.setFullName(fullName);
+        assertEquals(fullName, member.getFullName());
+        
     }
 
     /**
@@ -71,12 +76,9 @@ public class MemberTest {
     @Test
     public void testGetGender() {
         System.out.println("getGender");
-        Member instance = new Member();
-        char expResult = ' ';
-        char result = instance.getGender();
+        char expResult = 'M';
+        char result = member.getGender();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -85,11 +87,9 @@ public class MemberTest {
     @Test
     public void testSetGender() {
         System.out.println("setGender");
-        char gender = ' ';
-        Member instance = new Member();
-        instance.setGender(gender);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        char gender = 'F';
+        member.setGender(gender);
+        assertEquals(gender, member.getGender());
     }
 
     /**
@@ -98,12 +98,9 @@ public class MemberTest {
     @Test
     public void testGetDateOfBirth() {
         System.out.println("getDateOfBirth");
-        Member instance = new Member();
-        Date expResult = null;
-        Date result = instance.getDateOfBirth();
+        Date expResult = new Date(98772323);
+        Date result = member.getDateOfBirth();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -112,11 +109,9 @@ public class MemberTest {
     @Test
     public void testSetDateOfBirth() {
         System.out.println("setDateOfBirth");
-        Date dateOfBirth = null;
-        Member instance = new Member();
-        instance.setDateOfBirth(dateOfBirth);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Date dateOfBirth = new Date(21772323);
+        member.setDateOfBirth(dateOfBirth);
+        assertEquals(dateOfBirth, member.getDateOfBirth());
     }
 
     /**
@@ -125,12 +120,9 @@ public class MemberTest {
     @Test
     public void testGetEmail() {
         System.out.println("getEmail");
-        Member instance = new Member();
-        String expResult = "";
-        String result = instance.getEmail();
+        String expResult = "eabidal@club.com";
+        String result = member.getEmail();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -139,11 +131,9 @@ public class MemberTest {
     @Test
     public void testSetEmail() {
         System.out.println("setEmail");
-        String email = "";
-        Member instance = new Member();
-        instance.setEmail(email);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String email = "eabidalagain@club.com";
+        member.setEmail(email);
+        assertEquals(email, member.getEmail());
     }
 
     /**
@@ -152,12 +142,9 @@ public class MemberTest {
     @Test
     public void testGetPhoneNumber() {
         System.out.println("getPhoneNumber");
-        Member instance = new Member();
-        String expResult = "";
-        String result = instance.getPhoneNumber();
+        String expResult = "08033006978";
+        String result = member.getPhoneNumber();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -166,11 +153,9 @@ public class MemberTest {
     @Test
     public void testSetPhoneNumber() {
         System.out.println("setPhoneNumber");
-        String phoneNumber = "";
-        Member instance = new Member();
-        instance.setPhoneNumber(phoneNumber);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String phoneNumber = "09022331435";
+        member.setPhoneNumber(phoneNumber);
+        assertEquals(phoneNumber, member.getPhoneNumber());
     }
 
     /**
@@ -179,12 +164,9 @@ public class MemberTest {
     @Test
     public void testGetDateOfRegistration() {
         System.out.println("getDateOfRegistration");
-        Member instance = new Member();
-        Date expResult = null;
-        Date result = instance.getDateOfRegistration();
+        Date expResult = new Date(99993232);
+        Date result = member.getDateOfRegistration();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -193,11 +175,9 @@ public class MemberTest {
     @Test
     public void testSetDateOfRegistration() {
         System.out.println("setDateOfRegistration");
-        Date dateOfRegistration = null;
-        Member instance = new Member();
-        instance.setDateOfRegistration(dateOfRegistration);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Date dateOfRegistration = new Date(97793232);
+        member.setDateOfRegistration(dateOfRegistration);
+        assertEquals(dateOfRegistration, member.getDateOfRegistration());
     }
 
     /**
@@ -206,11 +186,8 @@ public class MemberTest {
     @Test
     public void testBorrowBook() {
         System.out.println("borrowBook");
-        Book book = null;
-        Member instance = new Member();
-        instance.borrowBook(book);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        member.borrowBook(book, new Date());
+        assertFalse(data.getBorrowQueue().isEmpty());
     }
 
     /**
@@ -219,11 +196,8 @@ public class MemberTest {
     @Test
     public void testReturnBook() {
         System.out.println("returnBook");
-        Book book = null;
-        Member instance = new Member();
-        instance.returnBook(book);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        member.returnBook(book);
+        assertTrue(data.getLendingList().isEmpty());
     }
     
 }
